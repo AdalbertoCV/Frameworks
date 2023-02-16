@@ -1,0 +1,13 @@
+
+<form method="post">
+    {% csrf_token %} 
+<input type="number" placeholder="Numero 1" name="n1" required>
+<br>
+<input type="number" placeholder="Numero 2" name="n2" required>
+<br>
+<button type="submit"> Sumar </button> 
+</form>
+
+{% if suma %}
+     {{suma}}
+{% endif %}

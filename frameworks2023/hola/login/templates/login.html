@@ -1,0 +1,27 @@
+  {% if mensaje %}
+     {{mensaje}}
+  {% endif %}
+  
+  <form method="post">
+    {% csrf_token %}
+    <div class="container">
+      <label for="uname"><b>Usuario</b></label>
+      <input type="text" placeholder="Escribir Usuario" name="uname" required>
+
+      <br>
+  
+      <label for="psw"><b>Contraseña</b></label>
+      <input type="password" placeholder="Escribir Constraseña" name="psw" required>
+  
+      <br>
+      <button type="submit"> Iniciar Sesión</button>
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> ¿Guardar Contraseña?
+      </label>
+    </div>
+  
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" class="cancelbtn">Cancelar</button>
+      <span class="psw"> <a href="#">Olvidaste tu Contraseña?</a></span>
+    </div>
+  </form>

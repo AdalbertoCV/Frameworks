@@ -1,0 +1,38 @@
+<h1>Hola {{nombre}} tu edad es {{edad}}</h1>
+
+{% if id == 0 %}
+    <p>El valor del parámetro es 0</p>
+{% else %}
+    <p>El valor del parámetro es {{id}}</p>
+{% endif %}
+    
+
+    <h3>Materias</h3>
+    
+    <ul>
+        {% for materia in materias %}
+            <li>{{materia}}</li>
+        {% endfor %}
+    </ul>
+    
+<table>
+    <thead>
+        <tr>
+            <th>Materia</th>
+            <th>Calificación</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cal in calificaciones %}
+            <tr>
+                <td>{{cal.mat}}</td>
+                <td>{{cal.cal}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+
+    
