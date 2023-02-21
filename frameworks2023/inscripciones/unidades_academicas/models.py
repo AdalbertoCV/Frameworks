@@ -13,7 +13,7 @@ class ProgramaAcademico(models.Model):
     latitud = models.CharField(max_length=50)
     longitud = models.CharField(max_length=50)
     telefono = models.CharField('Teléfono', max_length=10, blank=True, null=True)
-    unidad_academica = models.ForeignKey("unidades_academicas.UnidadAcademica", \
+    unidad_academica = models.ForeignKey("UnidadAcademica", \
         verbose_name='Unidad Académica', on_delete=models.DO_NOTHING)
     
     def __str__(self):
