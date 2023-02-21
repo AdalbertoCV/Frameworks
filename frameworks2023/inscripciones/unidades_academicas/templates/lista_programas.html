@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista De Programas Academicos</title>
+</head>
+<body>
+    <h1> Lista de programas Academicos</h1>
+    <table width="100%">
+        <thead>
+            <tr>
+                <th>Clave</th>
+                <th>Nombre</th>
+                <th>Latitud</th>
+                <th>Longitud</th>
+                <th>Telefono</th>
+                <th>Unidadad Académica</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for programa in Programas %}
+                <tr>
+                    <td> {{programa.clave}}</td>
+                    <td> {{programa.nombre}}</td>
+                    <td> {{programa.latitud}}</td>
+                    <td> {{programa.longitud}}</td>
+                    <td> {{programa.telefono}}</td>
+                    <td> {{programa.unidad_academica}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
