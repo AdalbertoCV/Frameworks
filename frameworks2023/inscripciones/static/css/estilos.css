@@ -1,0 +1,19 @@
+.btn{
+    font-size: 20px;
+    color: white;
+    padding: 7px;
+    border-radius: 3px;
+}
+
+.btn-verde{
+    background-color: green;
+}
+
+.btn-azul{
+    background-color: blue;
+}
+
+.btn-rojo{
+    background-color:red;
+}
+

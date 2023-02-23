@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista De Materias</title>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+<body>
+    <h1> Lista de Materias</h1>
+    <table width="100%">
+        <thead>
+            <tr>
+                <th>Clave</th>
+                <th>Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for materia in object_list %}
+                <tr>
+                    <td> {{materia.clave}}</td>
+                    <td> {{materia.nombre}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+</body>
+</html>

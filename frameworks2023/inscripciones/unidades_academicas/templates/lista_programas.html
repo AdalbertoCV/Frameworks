@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista De Programas Academicos</title>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
 </head>
 <body>
     <h1> Lista de programas Academicos</h1>
@@ -29,11 +31,13 @@
                     <td> {{programa.longitud}}</td>
                     <td> {{programa.telefono}}</td>
                     <td> {{programa.unidad_academica}}</td>
-                    <td><a href="{% url 'eliminar_programa' programa.clave %}"> Eliminar </a></td>
-                    <td><a href="{% url 'editar_programa' programa.clave %}"> Editar </a></td>
+                    <td><a class='btn btn-rojo' href="{% url 'eliminar_programa' programa.clave %}"> Eliminar </a></td>
+                    <td><a class= 'btn btn-verde' href="{% url 'editar_programa' programa.clave %}"> Editar </a></td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+    <br>
+    <a href="agregar" class="btn btn-azul"> Agregar Nuevo</a>
 </body>
 </html>
