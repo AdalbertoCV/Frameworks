@@ -4,3 +4,4 @@ from .models import Materia
 
 class ListaMaterias(ListView):
     model = Materia
+

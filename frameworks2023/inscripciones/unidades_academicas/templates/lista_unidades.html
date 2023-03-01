@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista De Unidades Academicas</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Lista de programas Academicos
+{% endblock titulo %}
+
+{% block contenido %}
     <h1> Lista de Unidades Academicas</h1>
-    <table width="100%">
+    <table class="table">
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -21,13 +19,12 @@
                 <tr>
                     <td> {{unidad.nombre}}</td>
                     <td> {{unidad.direccion}}</td>
-                    <td><a href="{% url 'eliminar_unidad' unidad.nombre %}"> Eliminar </a></td>
-                    <td><a href="{% url 'editar_unidad' unidad.nombre %}"> Editar </a></td>
+                    <td><a class="btn btn-danger"   href="{% url 'eliminar_unidad' unidad.nombre %}"> Eliminar </a></td>
+                    <td><a class="btn btn-success"   href="{% url 'editar_unidad' unidad.nombre %}"> Editar </a></td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
     <br>
-    <a href="agregar"> Agregar Nueva</a>
-</body>
-</html>
+    <a class="btn btn-info"  href="agregar"> Agregar Nueva</a>
+{% endblock contenido %}

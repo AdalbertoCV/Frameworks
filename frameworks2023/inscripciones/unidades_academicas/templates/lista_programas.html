@@ -1,43 +1,38 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista De Programas Academicos</title>
-    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
-</head>
-<body>
-    <h1> Lista de programas Academicos</h1>
-    <table width="100%">
-        <thead>
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Lista de programas Academicos
+{% endblock titulo %}
+
+{% block contenido %}
+<h1> Lista de programas Academicos</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Clave</th>
+            <th>Nombre</th>
+            <th>Latitud</th>
+            <th>Longitud</th>
+            <th>Telefono</th>
+            <th>Unidadad Académica</th>
+            <th>Acciónes</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for programa in Programas %}
             <tr>
-                <th>Clave</th>
-                <th>Nombre</th>
-                <th>Latitud</th>
-                <th>Longitud</th>
-                <th>Telefono</th>
-                <th>Unidadad Académica</th>
-                <th>Acciónes</th>
+                <td> {{programa.clave}}</td>
+                <td> {{programa.nombre}}</td>
+                <td> {{programa.latitud}}</td>
+                <td> {{programa.longitud}}</td>
+                <td> {{programa.telefono}}</td>
+                <td> {{programa.unidad_academica}}</td>
+                <td><a class='btn btn-danger' href="{% url 'eliminar_programa' programa.clave %}"> Eliminar </a></td>
+                <td><a class= 'btn btn-success' href="{% url 'editar_programa' programa.clave %}"> Editar </a></td>
             </tr>
-        </thead>
-        <tbody>
-            {% for programa in Programas %}
-                <tr>
-                    <td> {{programa.clave}}</td>
-                    <td> {{programa.nombre}}</td>
-                    <td> {{programa.latitud}}</td>
-                    <td> {{programa.longitud}}</td>
-                    <td> {{programa.telefono}}</td>
-                    <td> {{programa.unidad_academica}}</td>
-                    <td><a class='btn btn-rojo' href="{% url 'eliminar_programa' programa.clave %}"> Eliminar </a></td>
-                    <td><a class= 'btn btn-verde' href="{% url 'editar_programa' programa.clave %}"> Editar </a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <br>
-    <a href="agregar" class="btn btn-azul"> Agregar Nuevo</a>
-</body>
-</html>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<a href="agregar" class="btn btn-info"> Agregar Nuevo</a>
+{% endblock contenido %}
