@@ -11,6 +11,9 @@
             <tr>
                 <th>Clave</th>
                 <th>Nombre</th>
+                <th>Semestre</th>
+                <th>Creditos</th>
+                <th>Optativa</th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +21,19 @@
                 <tr>
                     <td> {{materia.clave}}</td>
                     <td> {{materia.nombre}}</td>
+                    <td> {{materia.semestre}}</td>
+                    <td> {{materia.creditos}}</td>
+                    <td> {% if materia.optativa == True %}
+                            Si
+                         {% else %}
+                            No
+                         {% endif %}
+                    </td>
+                    <td> 
+                        <a class="btn btn-success" href="{% url 'editar_materia' materia.clave %}"> Editar</a>
+                        <a class="btn btn-danger" href="{% url 'eliminar_materia' materia.clave %}"> Eliminar</a>
+                    </td>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

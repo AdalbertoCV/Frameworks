@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Eliminar Materia
+{% endblock titulo %}
+
+{% block contenido %}
+<form method="post">
+    {% csrf_token %}
+    <p> ¿Estás seguro de que quieres eliminar la materia {{object.nombre}} ?</p>
+    {{form}}
+    <button class="btn btn-danger" type="submit"> Eliminar </button>
+    <a class="btn btn-info" href="{% url 'lista_materias' %}"> Cancelar</a>
+</form>
+{% endblock contenido %}
