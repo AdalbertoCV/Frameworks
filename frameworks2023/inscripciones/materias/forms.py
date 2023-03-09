@@ -1,5 +1,5 @@
 from django import forms
-from .models import Materia
+from .models import Materia, SEMESTRE
 
 class FormMateria(forms.ModelForm):
     class Meta:
@@ -27,3 +27,25 @@ class FormMateriaEditar(forms.ModelForm):
             #'optativa': forms.TextInput(attrs= {'class':'form-control','placeholder':'Optativa'}),
             'creditos': forms.NumberInput(attrs= {'class':'form-control','placeholder':'No. Creditos'})
             }
+
+class FiltrosMateria(forms.Form):
+    nombre = forms.CharField(
+        widget= forms.TextInput(attrs={'placeholder':'Nombre','class': 'form-control'}),
+        required = False,
+        )
+    clave = forms.CharField(
+        widget= forms.TextInput(attrs={'placeholder':'Clave','class': 'form-control'}),
+        required = False,
+        )
+    semestre = forms.CharField(
+        widget= forms.Select(choices = SEMESTRE ,attrs={'placeholder':'Semestre','class': 'form-control'}),
+        required = False,
+        )
+    creditos = forms.CharField(
+        widget= forms.NumberInput(attrs={'placeholder':'Creditos','class': 'form-control'}),
+        required = False,
+        )
+    optativa = forms.CharField(
+        widget= forms.CheckboxInput(),
+        required = False,
+        )

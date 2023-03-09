@@ -6,6 +6,24 @@
 
 {% block contenido %}
     <h1> Lista de Materias</h1>
+    <form action="{% url 'buscar_materia' %}" method="post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>{{form.clave}}</td>
+                <td>{{form.nombre}}</td>
+                <td>{{form.semestre}}</td>
+                <td>{{form.creditos}}</td>
+                <td>
+                    <span>Optativa</span>
+                    {{form.optativa}}
+                </td>
+                <td>
+                    <input class="btn btn-info" type="submit" value="Buscar">
+                </td>
+            </tr>
+        </table>
+    </form>
     <table class="table">
         <thead>
             <tr>

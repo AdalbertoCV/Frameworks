@@ -1,6 +1,7 @@
 from django.db import models
 
 SEMESTRE = [
+('','-------------'),
 ('1','1er Semestre'),
 ('2','2do Semestre'),
 ('3','3er Semestre'),
