@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Eliminar Horario
+{% endblock titulo %}
+
+{% block contenido %}
+<form method="post">
+    {% csrf_token %}
+    <p> ¿Estás seguro de que quieres eliminar el horario?</p>
+    {{form}}
+    <button class="btn btn-danger" type="submit"> Eliminar </button>
+    <a class="btn btn-info" href="{% url 'lista_horarios' %}"> Cancelar</a>
+</form>
+{% endblock contenido %}

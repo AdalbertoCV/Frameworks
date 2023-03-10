@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Lista de Horarios
+{% endblock titulo %}
+
+{% block contenido %}
+    <h1> Lista de Horarios</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Clave</th>
+                <th>Materia</th>
+                <th>Docente</th>
+                <th>Semestre</th>
+                <th>Dia</th>
+                <th>Hora</th>
+                <th>Salon</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for horario in object_list %}
+                <tr>
+                    <td> {{horario.clave}}</td>
+                    <td> {{horario.materia}}</td>
+                    <td> {{horario.docente}}</td>
+                    <td> {{horario.semestre}}</td>
+                    <td> 
+                     {% if horario.dia == '1' %}
+                        Lunes
+                     {% elif horario.dia == '2' %}
+                        Martes
+                     {% elif horario.dia == '3' %}
+                        Miércoles
+                     {% elif horario.dia == '4' %}
+                        Jueves
+                     {% elif horario.dia == '5' %}
+                        Viernes
+                     {% else %}
+                        Sábado
+                     {% endif %}
+                    </td>
+                    <td> {{horario.hora}}</td>
+                    <td> {{horario.salon}}</td>
+                    <td> 
+                        <a class="btn btn-success" href="{% url 'editar_horario' horario.clave %}"> Editar</a>
+                        <a class="btn btn-danger" href="{% url 'eliminar_horario' horario.clave %}"> Eliminar</a>
+                    </td>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+</body>
+</html>
+{% endblock contenido %}

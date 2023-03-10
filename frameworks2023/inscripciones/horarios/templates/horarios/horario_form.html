@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    {{accion}} Horario
+{% endblock titulo %}
+
+{% block contenido %}
+    <h1> {{accion}} Horario</h1>
+    <form method="Post">
+        {% csrf_token %}
+        {{form.as_table}}
+    <br>
+    <button type="submit" class="btn btn-info"> 
+        {% if accion == 'Agregar' %}
+            Agregar
+        {% else %}
+            Guardar
+        {% endif %}
+    </button>
+    </form>
+{% endblock contenido %}
