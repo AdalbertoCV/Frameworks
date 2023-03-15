@@ -17,6 +17,7 @@ class Materia(models.Model):
     creditos = models.SmallIntegerField('Créditos')
     semestre = models.CharField(max_length=2, choices = SEMESTRE)
     optativa = models.BooleanField(default=False)
+    programa = models.ForeignKey("unidades_academicas.ProgramaAcademico", verbose_name="Programa Academico", on_delete= models.DO_NOTHING)
 
     def __str__(self):
         return f"{self.nombre} - {self.clave}" 
