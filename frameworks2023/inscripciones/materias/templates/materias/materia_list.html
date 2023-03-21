@@ -16,9 +16,16 @@
                 <td>{{form.creditos}}</td>
                 <td>
                     <span>Optativa</span>
-                    {{form.optativa}}
+                    <select name = 'optativa'>
+                        <option value="">------</option>
+                        <option value="1">Sí</option>
+                        <option value="2">No</option>
+                    </select>
                 </td>
                 <td>{{form.programa}}</td>
+                <td>
+                    <input type="text" name="Programa2">
+                </td>
                 <td>
                     <input class="btn btn-info" type="submit" value="Buscar">
                 </td>

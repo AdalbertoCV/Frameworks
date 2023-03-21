@@ -30,6 +30,9 @@ class EliminarMateria(DeleteView):
 class Bienvenida(TemplateView):
     template_name = 'home.html'
 
+class Bienvenida2(TemplateView):
+    template_name = 'home2.html'
+
 def BuscarMateria(request):
     materias = Materia.objects.all().order_by('nombre','semestre')
     form = FiltrosMateria(request.POST)
@@ -40,7 +43,8 @@ def BuscarMateria(request):
         creditos = request.POST.get('creditos',None)
         optativa = request.POST.get('optativa',None)
         programa = request.POST.get('programa',None)
-        programa = ProgramaAcademico.objects.get(clave=programa)
+        programa2 = request.POST.get('Programa2',None)
+        #programa = ProgramaAcademico.objects.get(clave=programa)
 
         if clave:
             materias = materias.filter(clave= clave)
@@ -50,12 +54,16 @@ def BuscarMateria(request):
             materias = materias.filter(semestre= semestre)
         if creditos:
             materias = materias.filter(creditos= creditos)
-        if optativa == 'on':
+        if optativa == '1':
             materias = materias.filter(optativa= True)
+        elif optativa=='2':
+            materias = materias.filter(optativa= False)
         if programa:
-            materias = materias.filter(programa= programa)
+            materias = materias.filter(programa__clave= programa)
+        if programa2:
+            materias = materias.filter(programa__nombre__contains= programa2)
         #else:
         #    materias = materias.filter(optativa= False)
-    print(materias.query)
+    #print(materias.query)
     context = {'object_list': materias, 'form': form}
     return render(request, 'materias/materia_list.html', context)
