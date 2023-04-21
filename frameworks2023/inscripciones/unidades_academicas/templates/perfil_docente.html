@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Perfil Docente
+{% endblock titulo %}
+
+{% block contenido %}
+    <h1> Perfil Docente </h1>
+    <form method="post" class ='form' enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+{% endblock contenido %}

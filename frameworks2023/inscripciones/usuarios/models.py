@@ -1,11 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .validators import imagen_validator, rfc_validator
 
 class Docente(models.Model):
     matricula = models.CharField('Matricula', max_length=50)
-    rfc = models.CharField('R.F.C', max_length=13)
+    rfc = models.CharField('R.F.C', max_length=13, validators= [rfc_validator])
+    nombre = models.CharField(max_length=150)
     apellido_paterno = models.CharField(max_length=150)
-    avatar = models.ImageField('Foto de perfil', upload_to = 'perfiles', null=True, blank=True)
+    apellido_materno = models.CharField(max_length=150)
+    avatar = models.ImageField('Foto de perfil', upload_to = 'perfiles', null=True, blank=True, validators= [imagen_validator])
     usuario = models.OneToOneField(User, verbose_name="Usuario", on_delete= models.CASCADE)
     fecha_nacimiento = models.DateField()
     estado = models.ForeignKey("usuarios.Estado", verbose_name= "Estado", on_delete= models.DO_NOTHING )

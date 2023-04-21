@@ -4,9 +4,11 @@ from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Horario
 from .forms import FormHorario, FormHorarioEditar
+from django.core.paginator import Paginator
 
 class ListaHorarios(ListView):
     model = Horario
+    paginate_by = 5
 
 class NuevoHorario(CreateView):
     model = Horario

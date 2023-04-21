@@ -5,8 +5,10 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Materia
 from .forms import FormMateria, FormMateriaEditar, FiltrosMateria
 from unidades_academicas.models import ProgramaAcademico
+from django.core.paginator import Paginator
 
 class ListaMaterias(ListView):
+    paginate_by = 5
     model = Materia
     extra_context = {'form': FiltrosMateria}
 
@@ -65,5 +67,8 @@ def BuscarMateria(request):
         #else:
         #    materias = materias.filter(optativa= False)
     #print(materias.query)
-    context = {'object_list': materias, 'form': form}
+    paginator = Paginator(materias,5)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {'object_list': page_obj, 'page_obj': page_obj, 'form': form}
     return render(request, 'materias/materia_list.html', context)

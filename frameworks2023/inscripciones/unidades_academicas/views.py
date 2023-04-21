@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
 from unidades_academicas.models import ProgramaAcademico, UnidadAcademica
 from unidades_academicas.forms import FormPrograma, FormUnidad
+from django.core.paginator import Paginator
 
 def lista_programas(request):
-    contexto = {'Programas':ProgramaAcademico.objects.all()}
+    programas = ProgramaAcademico.objects.all()
+    paginator = Paginator(programas, 5) 
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    contexto = {'object_list':page_obj, 'page_obj': page_obj,'Programas':programas}
     return render(request, 'lista_programas.html', contexto)
 
 def agregar_programa(request):
@@ -35,7 +40,11 @@ def editar_programa(request, clave):
 
 
 def lista_unidades(request):
-    contexto = {'Unidades':UnidadAcademica.objects.all()}
+    unidades = UnidadAcademica.objects.all()
+    paginator = Paginator(unidades, 5) 
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    contexto = {'object_list':page_obj, 'page_obj': page_obj,'Unidades':unidades}
     return render(request, 'lista_unidades.html', contexto)
 
 def agregar_unidad(request):
