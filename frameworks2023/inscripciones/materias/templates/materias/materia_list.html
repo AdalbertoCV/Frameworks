@@ -33,10 +33,12 @@
             </tr>
         </table>
     </form>
+    <form action="{% url 'eliminar_materias' %}" method="post" id="validar">
+        {% csrf_token %}
         <table class="table">
             <thead>
                  <tr>
-                    <th><input type="checkbox" name="todos"></th>
+                    <th><input type="checkbox" name="todos" onclick="seleccionar(this)" id="todos"></th>
                     <th>Clave</th>
                     <th>Nombre</th>
                     <th>Semestre</th>
@@ -48,7 +50,7 @@
              <tbody>
             {% for materia in object_list %}
                 <tr>
-                    <td><input type="checkbox" name="{{materia.clave}}"></td>
+                    <td><input type="checkbox" name="materias[]" value="{{ materia.clave }}"></td>
                     <td> {{materia.clave}}</td>
                     <td> {{materia.nombre}}</td>
                     <td> {{materia.semestre}}</td>
@@ -69,7 +71,10 @@
             {% endfor %}
         </tbody>
     </table>
-    <a href="{% url 'eliminar_materias' %}" class="btn btn-danger"> Eliminar Seleccion</a>
+    <div class="mt-3">
+        <button type="submit" class="btn btn-danger">Eliminar seleccion </button>
+      </div>
+    </form>
     <div class="pagination">
         <span class="step-links">
             {% if page_obj.has_previous %}
@@ -93,10 +98,21 @@
 {% endblock contenido %}
 
 {% block scripts %}
-    <script>
-        function enviar(page){
-            $("#page").val(page);
-            $("#form").submit();
-        }
-    </script>
-{% endblock scripts %}
+        <script>
+            function enviar(page){
+                $("#page").val(page);
+                $("#form").submit();
+            }
+        </script>
+
+        <script>
+            function seleccionar(source) {
+                checkboxes = document.getElementsByName('materias[]');
+
+                for(var i=0, n=checkboxes.length;i<n;i++) {
+                    checkboxes[i].checked = source.checked;
+                }
+
+            }
+        </script>
+    {% endblock scripts %}

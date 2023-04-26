@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -12,8 +12,17 @@ class ListaMaterias(ListView):
     model = Materia
     extra_context = {'form': FiltrosMateria}
 
+
 def eliminar_materias(request):
-    pass
+    if request.method == 'POST':
+        materias = request.POST.getlist('materias[]')
+        if len(materias) > 0:
+            for clave in materias:
+                Materia.objects.filter(clave=clave).delete()
+            return redirect('lista_materias')
+        else:
+            return redirect('lista_materias')
+    
 
 class NuevaMateria(CreateView):
     model = Materia
