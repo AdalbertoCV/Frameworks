@@ -6,7 +6,7 @@
 
 {% block contenido %}
     <h1> Lista de Materias</h1>
-    <form action="{% url 'buscar_materia' %}" method="post">
+    <form action="{% url 'buscar_materia' %}" method="post" id="form">
         {% csrf_token %}
         <table>
             <tr>
@@ -28,24 +28,27 @@
                 </td>
                 <td>
                     <input class="btn btn-info" type="submit" value="Buscar">
+                    <input type="hidden" name="page" id="page">
                 </td>
             </tr>
         </table>
     </form>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Clave</th>
-                <th>Nombre</th>
-                <th>Semestre</th>
-                <th>Creditos</th>
-                <th>Optativa</th>
-                <th>Programa</th>
-            </tr>
-        </thead>
-        <tbody>
+        <table class="table">
+            <thead>
+                 <tr>
+                    <th><input type="checkbox" name="todos"></th>
+                    <th>Clave</th>
+                    <th>Nombre</th>
+                    <th>Semestre</th>
+                    <th>Creditos</th>
+                    <th>Optativa</th>
+                    <th>Programa</th>
+                </tr>
+            </thead>
+             <tbody>
             {% for materia in object_list %}
                 <tr>
+                    <td><input type="checkbox" name="{{materia.clave}}"></td>
                     <td> {{materia.clave}}</td>
                     <td> {{materia.nombre}}</td>
                     <td> {{materia.semestre}}</td>
@@ -66,11 +69,12 @@
             {% endfor %}
         </tbody>
     </table>
+    <a href="{% url 'eliminar_materias' %}" class="btn btn-danger"> Eliminar Seleccion</a>
     <div class="pagination">
         <span class="step-links">
             {% if page_obj.has_previous %}
-                <a class="page-item" href="?page=1">&laquo; first</a>
-                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                <a class="javascript:enviar(1);" href="?page=1">&laquo; first</a>
+                <a href="javascript:enviar({{ page_obj.previous_page_number }});">previous</a>
             {% endif %}
     
             <span class="page-item">
@@ -78,8 +82,8 @@
             </span>
     
             {% if page_obj.has_next %}
-                <a class="page-item" href="?page={{ page_obj.next_page_number }}">next</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                <a class="page-item" href="javascript:enviar({{ page_obj.next_page_number }});">next</a>
+                <a href="javascript:enviar({{ page_obj.paginator.num_pages }});">last &raquo;</a>
             {% endif %}
         </span>
     </div>
@@ -87,3 +91,12 @@
 </body>
 </html>
 {% endblock contenido %}
+
+{% block scripts %}
+    <script>
+        function enviar(page){
+            $("#page").val(page);
+            $("#form").submit();
+        }
+    </script>
+{% endblock scripts %}

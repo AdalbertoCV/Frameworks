@@ -25,6 +25,9 @@
 </head>
 
 <body>
+  {% if mensaje %}
+    {{mensaje}}
+  {% endif %}
   <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
       <div class="content-wrapper d-flex align-items-center auth px-0">
@@ -36,7 +39,7 @@
               </div>
               <h4>Iniciar Sesión</h4>
               <h6 class="fw-light">Ingresa tus datos</h6>
-              <form class="pt-3" method="post">
+              <form class="pt-3" method="post" action="{% url 'login' %}">
                 {% csrf_token %}
                 <div class="form-group">
                   <input type="text" class="form-control form-control-lg" name="username" placeholder="Usuario">
@@ -65,7 +68,7 @@
                   <p>
                     ¿No tienes una cuenta? Crea Una
                   </p>
-                  <a href="{% url 'registrarDocente' %}" class="text-primary">Docente</a>
+                  <a href="{% url 'registrarDocente2' %}" class="text-primary">Docente</a>
                   <br>
                   <a href="{% url 'registrarAlumno' %}" class="text-primary">Alumno</a>
                 </div>

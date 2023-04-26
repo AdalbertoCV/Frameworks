@@ -11,4 +11,5 @@ urlpatterns = [
     path('registrar-alumno/', views.RegistrarAlumno.as_view(), name='registrarAlumno'),
     path('municipios/', views.busca_municipios, name='buscaMunicipios'),
     path('perfil/', views.perfil, name='perfilDocente'),
+    path('activar/<slug:uidb64>/<slug:token>', views.ActivarCuenta.as_view(), name='activar'),
 ]

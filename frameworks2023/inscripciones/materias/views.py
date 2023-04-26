@@ -12,6 +12,9 @@ class ListaMaterias(ListView):
     model = Materia
     extra_context = {'form': FiltrosMateria}
 
+def eliminar_materias(request):
+    pass
+
 class NuevaMateria(CreateView):
     model = Materia
     extra_context = {'accion': 'Agregar'}
@@ -68,7 +71,7 @@ def BuscarMateria(request):
         #    materias = materias.filter(optativa= False)
     #print(materias.query)
     paginator = Paginator(materias,5)
-    page_number = request.GET.get("page")
+    page_number = request.POST.get("page")
     page_obj = paginator.get_page(page_number)
     context = {'object_list': page_obj, 'page_obj': page_obj, 'form': form}
     return render(request, 'materias/materia_list.html', context)

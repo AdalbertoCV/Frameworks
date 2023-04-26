@@ -7,4 +7,5 @@ urlpatterns = [
     path('editar/<str:pk>', views.EditarMateria.as_view(), name = 'editar_materia'),
     path('buscar/', views.BuscarMateria, name = 'buscar_materia'),
     path('eliminar/<str:pk>', views.EliminarMateria.as_view(), name = 'eliminar_materia'),
+    path('eliminar_materias/', views.eliminar_materias, name = 'eliminar_materias'),
 ]
