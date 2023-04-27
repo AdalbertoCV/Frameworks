@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Materia
@@ -7,7 +8,7 @@ from .forms import FormMateria, FormMateriaEditar, FiltrosMateria
 from unidades_academicas.models import ProgramaAcademico
 from django.core.paginator import Paginator
 
-class ListaMaterias(ListView):
+class ListaMaterias(LoginRequiredMixin,ListView):
     paginate_by = 5
     model = Materia
     extra_context = {'form': FiltrosMateria}
@@ -24,7 +25,8 @@ def eliminar_materias(request):
             return redirect('lista_materias')
     
 
-class NuevaMateria(CreateView):
+class NuevaMateria(PermissionRequiredMixin,CreateView):
+    permission_required = 'permiso_docente'
     model = Materia
     extra_context = {'accion': 'Agregar'}
     #fields = '__all__'

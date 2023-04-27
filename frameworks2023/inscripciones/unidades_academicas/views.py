@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect
 from unidades_academicas.models import ProgramaAcademico, UnidadAcademica
 from unidades_academicas.forms import FormPrograma, FormUnidad
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required, permission_required
 
+
+@permission_required('materias.permiso_alumno')
 def lista_programas(request):
     programas = ProgramaAcademico.objects.all()
     paginator = Paginator(programas, 5) 

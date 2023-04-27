@@ -12,4 +12,6 @@ urlpatterns = [
     path('municipios/', views.busca_municipios, name='buscaMunicipios'),
     path('perfil/', views.perfil, name='perfilDocente'),
     path('activar/<slug:uidb64>/<slug:token>', views.ActivarCuenta.as_view(), name='activar'),
+    path('lista', views.lista_usuarios, name='lista_usuarios'),
+    path('asignar_muchos', views.asignar_muchos, name='asignarMuchos'),
 ]

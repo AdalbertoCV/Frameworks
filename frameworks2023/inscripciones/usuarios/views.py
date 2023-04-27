@@ -7,7 +7,7 @@ from .forms import FormDocente,FormAlumno, UserForm, FormPerfilDocente
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import JsonResponse
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group, Permission
 from .token import token_activacion
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -17,7 +17,37 @@ from django.core.mail import EmailMessage
 from django.views.generic import TemplateView
 #def login(request):
  #   return render(request, 'login.html')
- 
+
+def lista_usuarios(request):
+    usuarios = User.objects.all()
+    grupos = Group.objects.all()
+
+    context = {
+        'usuarios': usuarios, 'grupos': grupos
+    }
+
+    return render(request, 'lista_usuarios.html', context)
+
+def asignar_muchos(request):
+    if request.method == 'POST':
+        usuarios = request.POST.getlist('usuarios[]')
+        if len(usuarios) > 0:
+            for id in usuarios:
+                userActual = User.objects.get(id=id)
+                grupo = request.POST["grupo"]
+                if grupo==1:
+                    grupo = "alumno"
+                if grupo==2:
+                    grupo= "docente"
+                if grupo==3:
+                    grupo="administrador"
+                #print(grupo)
+                group = Group.objects.get(name=grupo)
+                userActual.groups.add(group)
+            return redirect('lista_usuarios')
+        else:
+            return redirect('lista_usuarios')
+
 def perfil(request):
     #print(request.user.docente)
     try:
@@ -58,9 +88,11 @@ class RegistrarDocente2(SuccessMessageMixin, CreateView):
     def form_valid(self, form):
         form = UserForm(self.request.POST)
         if form.is_valid():
+            group = Group.objects.get(name='docente')
             user = form.save(commit=False)
             user.is_active = False
             user.save()
+            user.groups.add(group)
             # miapp.com
             # localhost:8000
             dominio = get_current_site(self.request)

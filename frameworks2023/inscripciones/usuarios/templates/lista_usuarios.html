@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Lista Usuarios
+{% endblock titulo %}
+
+{% block contenido %}
+    <h1> Lista Usuarios</h1>
+    <form action="{% url 'asignarMuchos' %}" method="post" >
+        {% csrf_token %}
+        <table class="table">
+            <thead>
+                 <tr>
+                    <th><input type="checkbox" name="todos" onclick="seleccionar(this)" id="todos"></th>
+                    <th>Nombre Usuario</th>
+                    <th>E-mail</th>
+                    <th>Permisos</th>
+                </tr>
+            </thead>
+             <tbody>
+            {% for usuario in usuarios %}
+                <tr>
+                    <td><input type="checkbox" name="usuarios[]" value="{{ usuario.id }}"></td>
+                    <td> {{usuario.username}}</td>
+                    <td> {{usuario.email}}</td>
+                    <td> {{usuario.groups.all}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+         </table>
+        <select name = "grupo">
+        {% for grupo in grupos %}
+         <option value="{{grupo.name}}">{{grupo.name}}</option>
+        {% endfor %}
+            </select>
+        <button type="submit" class="btn btn-info"> Asignar a la seleccion</button>
+     </form>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a class="javascript:enviar(1);" href="?page=1">&laquo; first</a>
+                <a href="javascript:enviar({{ page_obj.previous_page_number }});">previous</a>
+            {% endif %}
+    
+            <span class="page-item">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a class="page-item" href="javascript:enviar({{ page_obj.next_page_number }});">next</a>
+                <a href="javascript:enviar({{ page_obj.paginator.num_pages }});">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</body>
+</html>
+{% endblock contenido %}
+
+{% block scripts %}
+        <script>
+            function enviar(page){
+                $("#page").val(page);
+                $("#form").submit();
+            }
+        </script>
+
+        <script>
+            function seleccionar(source) {
+                checkboxes = document.getElementsByName('usuarios[]');
+
+                for(var i=0, n=checkboxes.length;i<n;i++) {
+                    checkboxes[i].checked = source.checked;
+                }
+
+            }
+        </script>
+    {% endblock scripts %}
