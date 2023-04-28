@@ -28,7 +28,7 @@ def lista_usuarios(request):
 
     return render(request, 'lista_usuarios.html', context)
 
-def asignar_muchos(request):
+def asignar_permisos(request):
     if request.method == 'POST':
         usuarios = request.POST.getlist('usuarios[]')
         if len(usuarios) > 0:
@@ -47,6 +47,26 @@ def asignar_muchos(request):
             return redirect('lista_usuarios')
         else:
             return redirect('lista_usuarios')
+
+def eliminar_permisos(request):
+    usuarios = request.POST.getlist('usuarios[]')
+    if len(usuarios) > 0:
+        for id in usuarios:
+            userActual = User.objects.get(id=id)
+            grupo = request.POST["grupo"]
+            if grupo==1:
+                grupo = "alumno"
+            if grupo==2:
+                grupo= "docente"
+            if grupo==3:
+                grupo="administrador"
+            #print(grupo)
+            group = Group.objects.get(name=grupo)
+            if group:
+                userActual.groups.remove(group)
+            return redirect('lista_usuarios')
+    else:
+        return redirect('lista_usuarios')
 
 def perfil(request):
     #print(request.user.docente)

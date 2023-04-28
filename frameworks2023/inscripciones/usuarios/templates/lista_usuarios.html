@@ -6,7 +6,7 @@
 
 {% block contenido %}
     <h1> Lista Usuarios</h1>
-    <form action="{% url 'asignarMuchos' %}" method="post" >
+    <form action="{% url 'asignar_permisos' %}" method="post" name="form1" id="form1">
         {% csrf_token %}
         <table class="table">
             <thead>
@@ -33,7 +33,8 @@
          <option value="{{grupo.name}}">{{grupo.name}}</option>
         {% endfor %}
             </select>
-        <button type="submit" class="btn btn-info"> Asignar a la seleccion</button>
+        <button type="submit" class="btn btn-info" onclick="changeAction(1)"> Asignar a la seleccion</button>
+        <button type="submit" class="btn btn-danger" onclick="changeAction(2)"> Desasignar a la seleccion</button>
      </form>
     <div class="pagination">
         <span class="step-links">
@@ -72,6 +73,19 @@
                     checkboxes[i].checked = source.checked;
                 }
 
+            }
+        </script>
+
+        <script>
+            let op1 = "{% url 'asignar_permisos' %}";
+            let op2 = "{% url 'eliminar_permisos' %}";
+            function changeAction(action){
+                if (action == 1){
+                    $("#form1").attr("action",op1);
+                }
+                else{
+                    $("#form1").attr("action",op2);
+                }
             }
         </script>
     {% endblock scripts %}

@@ -13,5 +13,6 @@ urlpatterns = [
     path('perfil/', views.perfil, name='perfilDocente'),
     path('activar/<slug:uidb64>/<slug:token>', views.ActivarCuenta.as_view(), name='activar'),
     path('lista', views.lista_usuarios, name='lista_usuarios'),
-    path('asignar_muchos', views.asignar_muchos, name='asignarMuchos'),
+    path('asignar_permisos', views.asignar_permisos, name='asignar_permisos'),
+    path('eliminar_permisos', views.eliminar_permisos, name='eliminar_permisos'),
 ]
