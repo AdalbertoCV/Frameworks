@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <title>
+        {% block titulo %}
+
+        {% endblock titulo %}
+    </title>
+</head>
+<body>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Unidades
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="{% url 'lista_unidades' %}">Lista</a>
+                  <a class="dropdown-item" href="{% url 'agregar_unidad' %}">Agregar</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Materias
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="{% url 'lista_materias' %}">Lista</a>
+                  <a class="dropdown-item" href="{% url 'agregar_materia' %}">Agregar</a>
+                </div>
+              </li>
+    <div class="container">
+        {% block contenido %}
+
+        {% endblock contenido %}
+    </div>
+    <script src="{% static 'js/jquery-3.6.3.min.js' %}" ></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}" ></script>
+    <script src="{% static 'js/bootstrap.min.js' %}" ></script>
+    {% block scripts %}
+
+    {% endblock scripts %}
+</body>
+</html>

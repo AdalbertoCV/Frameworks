@@ -24,50 +24,22 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
               </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Programas
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="{% url 'lista_programas' %}">Lista</a>
-                <a class="dropdown-item" href="{% url 'agregar_programa' %}">Agregar</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Unidades
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="{% url 'lista_unidades' %}">Lista</a>
-                  <a class="dropdown-item" href="{% url 'agregar_unidad' %}">Agregar</a>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Materias
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="{% url 'lista_materias' %}">Lista</a>
-                  <a class="dropdown-item" href="{% url 'agregar_materia' %}">Agregar</a>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Horarios
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="{% url 'lista_horarios' %}">Lista</a>
-                  <a class="dropdown-item" href="{% url 'agregar_horario' %}">Agregar</a>
-                </div>
-              </li>
-              <li class="nav-item-dropdown">
-                <a class="nav-link" href="{% url 'lista_usuarios' %}">Usuarios</a>
-              </li>
-              <li class="nav-item-dropdown">
-                <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
-              </li>
-              <li class="nav-item-dropdown">
+
+            {% if 'materias.permiso_admin' in perms %}
+                {% include 'menu_administradores.html' %}
+            {% elif 'materias.permiso_docente' in perms %}
+                {% include 'menu_docentes.html' %}
+            {% elif 'materias.permiso_alumno' in perms %}
+                {% include 'menu_alumnos.html' %}
+            {% endif %}
                 <a class="nav-link" href="{% url 'perfilDocente' %}">{{user}}</a>
+                {% if user.docente %}
+                    {{user.docente.nombre}} {{user.docente.apellido_paterno}} {{user.docente.apellido_materno}}
+                {% elif user.alumno %}
+                    {{user.alumno.nombre}} {{user.alumno.apellido_paterno}} {{user.alumno.apellido_materno}}
+                {% else %}
+                    Aún no registras tus datos personales
+                {% endif %}
               </li>
               <li class="nav-item-dropdown">
                 <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>

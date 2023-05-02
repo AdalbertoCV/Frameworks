@@ -63,17 +63,20 @@
                     </td>
                     <td> {{materia.programa}}</td>
                     <td> 
-                        <a class="btn btn-success" href="{% url 'editar_materia' materia.clave %}"> Editar</a>
-                        <a class="btn btn-danger" href="{% url 'eliminar_materia' materia.clave %}"> Eliminar</a>
-                    </td>
+                    {% if 'materias.permiso_docente' in perms %}
+                            <a class="btn btn-success" href="{% url 'editar_materia' materia.clave %}"> Editar</a>
+                            <a class="btn btn-danger" href="{% url 'eliminar_materia' materia.clave %}"> Eliminar</a>
+                    {% endif %}
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+    {% if 'materias.permiso_docente' in perms %}
     <div class="mt-3">
         <button type="submit" class="btn btn-danger">Eliminar seleccion </button>
       </div>
+    {% endif %}
     </form>
     <div class="pagination">
         <span class="step-links">
