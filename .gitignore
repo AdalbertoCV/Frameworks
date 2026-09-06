@@ -1,0 +1,24 @@
+# Entornos y dependencias
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Django
+*.sqlite3
+media/
+staticfiles/
+local_settings.py
+
+# Secretos
+.env
+
+# Sistema operativo / editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
